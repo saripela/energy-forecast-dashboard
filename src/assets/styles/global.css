@@ -1,0 +1,163 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .dashboard-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "header header header"
+      "sidebar content filters"
+      "footer footer footer";
+    height: 100vh;
+  }
+  
+  /* Header */
+  .navbar-header {
+    grid-area: header;
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+  }
+  .navbar-header img{
+    width: 8rem;
+  }
+  
+  .navbar-header h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .navbar-header button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+  }
+  
+  /* Main Layout */
+  .dashboard-layout {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr; /* Adjust these ratios as needed */
+    grid-template-areas: "sidebar content filters";
+    height: 100%;
+    grid-gap: 20px;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    grid-area: sidebar;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    margin: 0;       /* Make sure there is no external margin */
+  width: 100%;     /* Full width to take up the sidebar space */
+  height: 100%;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+  
+  /* Content */
+  .dashboard-content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center horizontally */
+    padding: 20px;
+    background-color: #fff;
+    width: 100%;
+  }
+  
+  /* Charts Container */
+  .charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%; /* Ensure the charts take up the full width of the content */
+    margin-bottom: 40px; /* Add space between charts and data table */
+    text-align: center;
+  }
+  
+  .line-chart, .bar-chart {
+  flex: 1;
+    margin-right: 20px; /* Space between the charts */
+  }
+  
+  .line-chart:last-child {
+    margin-right: 0; /* Remove margin for the last chart */
+  }
+
+  /* Data Table Section */
+  .data-table-section {
+   text-align: center;
+    width: 100%; /* Ensures that the table can grow horizontally */
+    max-height: 200px; /* Adjust based on the approximate height of 5 rows */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+ 
+  
+  .data-table-section table {
+    width: 95%; /* Make the table stretch across the parent width */
+    border-collapse: collapse; /* Avoid double borders */
+    text-align: left;
+  }
+  
+  .data-table-section th, .data-table-section td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Light border for each cell */
+  }
+  
+  .data-table-section th {
+    background-color: #f4f4f4; /* Light background for header */
+    font-weight: bold;
+  }
+  
+  .data-table-section h3 {
+    margin-bottom: 20px;
+  }
+  
+  /* Filters */
+  .dashboard-filters {
+    grid-area: filters;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ddd;
+    width: 250px; /* Set a fixed width for filters */
+  }
+  
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .filters label {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  /* Footer */
+  .dashboard-footer {
+    grid-area: footer;
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #ddd;
+  }
