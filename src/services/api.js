@@ -4,7 +4,7 @@ const API_URL = 'https://susanruan-24deviceenergyforecasting.hf.space/forecast_2
 const API_OVERALL = 'https://susanruan-24EnergyForecasting.hf.space/forecast_values';
 const ACCESS_TOKEN = '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';
 
-export const fetchDeviceData = async () => {
+export const fetchForecastData = async () => {
     try {
         const response = await axios.get(API_URL, {
             headers: {
