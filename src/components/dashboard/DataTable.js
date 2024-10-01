@@ -20,8 +20,8 @@ const DataTable = ({ data }) => {
                 .filter(key => key !== 'timestamp') // Exclude 'timestamp'
                 .map((key, index) => (
                   <th key={index}>
-                    {/* Conditionally add "(in kWh)" only to specific columns */}
-                    {key === 'Time' ? key : `${key} (in kWh)`}
+                    {/* Conditionally add "(in kW)" only to specific columns */}
+                    {key === 'Time' ? key : `${key} (in kW)`}
                   </th>
               ))}
             </tr>

@@ -24,6 +24,27 @@ const DashboardPage = () => {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const toggleChart = () => setShowBarChart(!showBarChart);
   const handleDateChange = (date) => setStartDate(date);
+  // Define options separately
+  const options = {
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: 'Electrical energy consumption (kW)',
+          font: {
+            size: 11, // Adjust the font size if needed
+          },
+          color: '#000', // You can change the color
+        },
+        ticks: {
+          // Additional options for ticks if needed
+        }
+      },
+      x: {
+        // Configuration for x-axis if needed
+      }
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -47,7 +68,7 @@ const DashboardPage = () => {
           setLineChartData({
             labels,
             datasets: [
-              { label: 'Thermostat (in kW)', data: thermostatData, borderColor: 'rgba(75, 192, 192, 1)', backgroundColor: 'rgba(75, 192, 192, 0.2)', fill: true, tension: 0.1 },
+              { label: 'Thermostat', data: thermostatData, borderColor: 'rgba(75, 192, 192, 1)', backgroundColor: 'rgba(75, 192, 192, 0.2)', fill: true, tension: 0.1 },
               { label: 'Doorbell', data: vivintData, borderColor: 'rgba(255, 99, 132, 1)', backgroundColor: 'rgba(255, 99, 132, 0.2)', fill: true, tension: 0.1 },
             ],
           });
@@ -98,7 +119,7 @@ const DashboardPage = () => {
         <div className="charts-and-table">
           <div className="charts-container">
             {isMobile ? (
-              <BarChart data={barChartData} />
+              <BarChart data={barChartData} options={options} />
             ) : (
               <>
                 <div className="chart-toggle-buttons">
@@ -107,7 +128,7 @@ const DashboardPage = () => {
                   <input type="radio" id="barChart" name="chartType" value="bar" checked={showBarChart} onChange={() => setShowBarChart(true)} />
                   <label htmlFor="barChart">Bar Chart</label>
                 </div>
-                {showBarChart ? <BarChart data={barChartData} /> : <LineChart data={lineChartData} />}
+                {showBarChart ? <BarChart data={barChartData} options={options}/> : <LineChart data={lineChartData} options={options}/>}
               </>
             )}
           </div>
