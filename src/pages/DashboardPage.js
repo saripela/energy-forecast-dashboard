@@ -1,150 +1,120 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
+import appliancesData from '../data/appliances.json';
+import overallData from '../data/overall.json';
 import Navbar from '../components/common/Navbar';
+import 'react-datepicker/dist/react-datepicker.css';
 import Footer from '../components/common/Footer';
 import LineChart from '../components/dashboard/LineChart';
 import BarChart from '../components/dashboard/BarChart';
 import DataTable from '../components/dashboard/DataTable';
 import DashboardLayout from '../layouts/DashboardLayout';
-import { fetchForecastData, fetchOverallData } from '../services/api'; // Import both API functions
 
 const DashboardPage = () => {
+  const [view, setView] = useState('Overall');
   const [lineChartData, setLineChartData] = useState(null);
   const [barChartData, setBarChartData] = useState(null);
   const [tableData, setTableData] = useState([]);
-  const [filter, setFilter] = useState('Appliances'); // Filter state to switch between APIs
   const [loading, setLoading] = useState(true);
+  const [showBarChart, setShowBarChart] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Handle filter change
-  const onFilterChange = (event) => {
-    setFilter(event.target.value); // Update filter value when selection changes
-  };
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleChart = () => setShowBarChart(!showBarChart);
+  const handleDateChange = (date) => setStartDate(date);
 
   useEffect(() => {
-    const loadData = async () => {
-      setLoading(true); // Set loading state true when fetching data
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
       try {
-        let apiData;
+        const data = view === 'Appliances' ? appliancesData : overallData;
+        const labels = data.map(item => moment(item.timestamp).format('YYYY/MM/DD HH:mm'));
 
-        if (filter === 'Appliances') {
-          apiData = await fetchForecastData(); // Fetch appliances data
-          console.log('Appliances API Data:', apiData);
-          
-          // Process data for charts and table for Appliances
-          const labels = apiData.map(item => item.timestamp);
-          const thermostatData = apiData.map(item => item.Thermostat_Predicted);
-          const vivintData = apiData.map(item => item.Vivint_Predicted);
+        // Prepare data for charts and table based on the selected view
+        if (view === 'Appliances') {
+          const thermostatData = data.map(item => item.Thermostat);
+          const vivintData = data.map(item => item.Doorbell);
 
-          // Line chart data for Appliances
           setLineChartData({
-            labels: labels,
+            labels,
             datasets: [
-              {
-                label: 'Thermostat Predicted',
-                data: thermostatData,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
-                tension: 0.1,
-              },
-              {
-                label: 'Vivint Predicted',
-                data: vivintData,
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                fill: true,
-                tension: 0.1,
-              },
+              { label: 'Thermostat (in kW)', data: thermostatData, borderColor: 'rgba(75, 192, 192, 1)', backgroundColor: 'rgba(75, 192, 192, 0.2)', fill: true, tension: 0.1 },
+              { label: 'Doorbell', data: vivintData, borderColor: 'rgba(255, 99, 132, 1)', backgroundColor: 'rgba(255, 99, 132, 0.2)', fill: true, tension: 0.1 },
             ],
           });
 
-          // Bar chart data for Appliances
           setBarChartData({
-            labels: ['Thermostat', 'Vivint'],
+            labels: ['Thermostat', 'Doorbell'],
             datasets: [
-              {
-                label: 'Predicted Energy Usage',
-                data: [
-                  thermostatData.reduce((a, b) => a + b, 0),
-                  vivintData.reduce((a, b) => a + b, 0),
-                ],
-                backgroundColor: ['#FF6384', '#36A2EB'],
-              },
+              { label: 'Predicted Energy Usage', data: [thermostatData.reduce((a, b) => a + b, 0), vivintData.reduce((a, b) => a + b, 0)], backgroundColor: ['#FF6384', '#36A2EB'] },
             ],
           });
 
-          // Set table data for Appliances
-          setTableData(apiData);
+          setTableData(data.map(item => ({ Time: moment(item.timestamp).format('YYYY/MM/DD HH:mm:ss'), ...item })));
+        } else {
+          const predictedUsageData = data.map(item => item['Predicted Usage']);
 
-        } else if (filter === 'Overall') {
-          apiData = await fetchOverallData(); // Fetch overall data
-          console.log('Overall API Data:', apiData);
-
-          // Process data for charts and table for Overall
-          const labels = apiData.map(item => item.timestamp);
-          const predictedUsageData = apiData.map(item => item['Predicted Usage']);
-
-          // Line chart data for Overall
           setLineChartData({
-            labels: labels,
+            labels,
             datasets: [
-              {
-                label: 'Predicted Usage',
-                data: predictedUsageData,
-                borderColor: 'rgba(54, 162, 235, 1)',
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                fill: true,
-                tension: 0.1,
-              },
+              { label: 'Predicted Usage', data: predictedUsageData, borderColor: 'rgba(54, 162, 235, 1)', backgroundColor: 'rgba(54, 162, 235, 0.2)', fill: true, tension: 0.1 },
             ],
           });
 
-          // Bar chart data for Overall
           setBarChartData({
             labels: ['Predicted Usage'],
             datasets: [
-              {
-                label: 'Total Predicted Usage',
-                data: [predictedUsageData.reduce((a, b) => a + b, 0)],
-                backgroundColor: ['#36A2EB'],
-              },
+              { label: 'Total Predicted Usage', data: [predictedUsageData.reduce((a, b) => a + b, 0)], backgroundColor: ['#36A2EB'] },
             ],
           });
 
-          
+          setTableData(data.map(item => ({ Time: moment(item.timestamp).format('YYYY/MM/DD HH:mm:ss'), ...item })));
         }
-
-        setLoading(false); // Set loading state false when data is fetched
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching forecast data:', error);
         setLoading(false);
       }
     };
 
-    loadData();
-  }, [filter]); // Depend on filter state so it reloads data on filter change
+    fetchData();
+  }, [view]);
 
-  // Handle loading state
-  if (loading || !lineChartData || !barChartData) {
-    return <div>Loading...</div>;
-  }
+  if (loading || !lineChartData || !barChartData) return <div>Loading...</div>;
 
   return (
     <div className="dashboard-container">
-      <Navbar />
-      <DashboardLayout>
-        <div className="filter-container">
-          <h4>Filter Data</h4>
-          <select onChange={onFilterChange} value={filter}>
-            <option value="Appliances">Appliances</option>
-            <option value="Overall">Overall</option>
-          </select>
+      <Navbar toggleSidebar={toggleSidebar} startDate={startDate} handleDateChange={handleDateChange} />
+      <DashboardLayout setView={setView} view={view} isSidebarOpen={isSidebarOpen}>
+        <div className="charts-and-table">
+          <div className="charts-container">
+            {isMobile ? (
+              <BarChart data={barChartData} />
+            ) : (
+              <>
+                <div className="chart-toggle-buttons">
+                  <input type="radio" id="lineChart" name="chartType" value="line" checked={!showBarChart} onChange={() => setShowBarChart(false)} />
+                  <label htmlFor="lineChart">Line Chart</label>
+                  <input type="radio" id="barChart" name="chartType" value="bar" checked={showBarChart} onChange={() => setShowBarChart(true)} />
+                  <label htmlFor="barChart">Bar Chart</label>
+                </div>
+                {showBarChart ? <BarChart data={barChartData} /> : <LineChart data={lineChartData} />}
+              </>
+            )}
+          </div>
+          <div className="data-table-wrapper">
+            <DataTable data={tableData} />
+          </div>
         </div>
-        <div className="charts-container">
-          <LineChart data={lineChartData} />
-          <BarChart data={barChartData} />
-        </div>
-        <DataTable data={tableData} />
       </DashboardLayout>
       <Footer />
     </div>

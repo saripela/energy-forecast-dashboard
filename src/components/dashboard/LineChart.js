@@ -5,11 +5,11 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 // Register the components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const LineChart = ({ data }) => {
+const LineChart = ({ data, options }) => {
   return (
     <div className="line-chart">
-      <h3>Line Charts</h3>
-      <Line data={data} />
+   
+      <Line data={data} options={options}/>
     </div>
   );
 };

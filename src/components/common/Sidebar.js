@@ -1,15 +1,46 @@
 import React from 'react';
 
-const Sidebar = () => {
+const Sidebar = ({ setView, view, isSidebarOpen }) => {
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
       <ul>
-        <li>Overview</li>
-        <li>Reports</li>
-        <li>Appliances</li>
-        <li>Portfolio</li>
-        <li>Alerts</li>
-        <li>Help & Support</li>
+        <li
+          onClick={() => setView('Overall')}
+          className={view === 'Overall' ? 'active' : ''}
+        >
+          Overview
+        </li>
+        <li
+          onClick={() => setView('Appliances')}
+          className={view === 'Appliances' ? 'active' : ''}
+        >
+          Appliances
+        </li>
+        <li
+          onClick={() => setView('Reports')}
+          className={view === 'Reports' ? 'active' : ''}
+        >
+          Reports
+        </li>
+        
+        <li
+          onClick={() => setView('Portfolio')}
+          className={view === 'Portfolio' ? 'active' : ''}
+        >
+          Portfolio
+        </li>
+        <li
+          className="disabled"
+          onClick={(e) => e.preventDefault()} // Prevent click event
+        >
+          Alerts
+        </li>
+        <li
+          className="disabled"
+          onClick={(e) => e.preventDefault()} // Prevent click event
+        >
+          Help & Support
+        </li>
       </ul>
     </aside>
   );

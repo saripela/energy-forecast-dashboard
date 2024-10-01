@@ -1,16 +1,24 @@
-//A reusable Navbar component.
-
 import React from 'react';
+
 import logoImage from '../../assets/images/logo.png'; // Path to your logo image
 
-const Navbar = () => {
+const Navbar = ({ toggleSidebar }) => {
   return (
     <header className="navbar-header">
-      
-        <img src={logoImage} alt="Logo" className="logo" />
-        <h1>Energy Forecasting Dashboard</h1>
+    
+        <div className="navbar-left">
 
-      <button>Select Date</button>
+        {/* Hamburger Menu */}
+        <button className="hamburger-menu" onClick={toggleSidebar}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </button>
+        <img src={logoImage} alt="Logo" className="logo" />
+        </div>
+     
+      <h1>Energy Forecasting Dashboard</h1>
+      <button className="select-date-button" disabled>Select Date</button>
     </header>
   );
 };

@@ -5,11 +5,11 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 // Register the components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChart = ({ data }) => {
+const BarChart = ({ data, options }) => {
   return (
     <div className="bar-chart">
-      <h3>Bar Charts</h3>
-      <Bar data={data} />
+   
+      <Bar data={data} options={options} />
     </div>
   );
 };

@@ -1,15 +1,16 @@
 import React from 'react';
 import Sidebar from '../components/common/Sidebar';
-import Filters from '../components/dashboard/Filters';
 
-const DashboardLayout = ({ children }) => {
+
+const DashboardLayout = ({ children, setView, view, isSidebarOpen }) => {
   return (
     <div className="dashboard-layout">
-      <Sidebar />
+       <Sidebar setView={setView} view={view} isSidebarOpen={isSidebarOpen}/>
+       
       <div className="dashboard-content">
         {children} {/* This will be the charts and data table */}
       </div>
-      <Filters />
+     
     </div>
   );
 };
