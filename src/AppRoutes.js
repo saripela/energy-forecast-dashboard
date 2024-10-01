@@ -5,7 +5,7 @@ import DashboardPage from './pages/DashboardPage';
 const AppRoutes = () => (
   <Router>
     <Routes>
-      <Route path="/dashboard" element={<DashboardPage />} />
+      <Route path="/" element={<DashboardPage />} />
     </Routes>
   </Router>
 );
