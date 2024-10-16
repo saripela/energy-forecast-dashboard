@@ -9,6 +9,9 @@ import LineChart from '../components/dashboard/LineChart';
 import BarChart from '../components/dashboard/BarChart';
 import DataTable from '../components/dashboard/DataTable';
 import DashboardLayout from '../layouts/DashboardLayout';
+import RecommendedPlans from '../components/dashboard/RecommendedPlans';
+import EstimatedBill from '../components/dashboard/EstimatedBill';
+import EnergySavingTips from '../components/dashboard/energySavingTips';
 
 const DashboardPage = () => {
   const [view, setView] = useState('Overall');
@@ -114,31 +117,73 @@ const DashboardPage = () => {
 
   return (
     <div className="dashboard-container">
-      <Navbar toggleSidebar={toggleSidebar} startDate={startDate} handleDateChange={handleDateChange} />
-      <DashboardLayout setView={setView} view={view} isSidebarOpen={isSidebarOpen}>
-        <div className="charts-and-table">
-          <div className="charts-container">
-            {isMobile ? (
+  <Navbar toggleSidebar={toggleSidebar} startDate={startDate} handleDateChange={handleDateChange} />
+  <DashboardLayout setView={setView} view={view} isSidebarOpen={isSidebarOpen}>
+    <div className="energySaving-container">
+    <h2>Energy Saving Tips</h2>
+      <EnergySavingTips/>
+    </div>
+    {/* Charts and Table Section */}
+    <div className="charts-and-table-wrapper">
+      <div className="charts-container">
+        {isMobile ? (
+          <BarChart data={barChartData} options={options} />
+        ) : (
+          <>
+            <div className="chart-toggle-buttons">
+              <input
+                type="radio"
+                id="lineChart"
+                name="chartType"
+                value="line"
+                checked={!showBarChart}
+                onChange={() => setShowBarChart(false)}
+              />
+              <label htmlFor="lineChart">Line Chart</label>
+              <input
+                type="radio"
+                id="barChart"
+                name="chartType"
+                value="bar"
+                checked={showBarChart}
+                onChange={() => setShowBarChart(true)}
+              />
+              <label htmlFor="barChart">Bar Chart</label>
+            </div>
+            {showBarChart ? (
               <BarChart data={barChartData} options={options} />
             ) : (
-              <>
-                <div className="chart-toggle-buttons">
-                  <input type="radio" id="lineChart" name="chartType" value="line" checked={!showBarChart} onChange={() => setShowBarChart(false)} />
-                  <label htmlFor="lineChart">Line Chart</label>
-                  <input type="radio" id="barChart" name="chartType" value="bar" checked={showBarChart} onChange={() => setShowBarChart(true)} />
-                  <label htmlFor="barChart">Bar Chart</label>
-                </div>
-                {showBarChart ? <BarChart data={barChartData} options={options}/> : <LineChart data={lineChartData} options={options}/>}
-              </>
+              <LineChart data={lineChartData} options={options} />
             )}
-          </div>
-          <div className="data-table-wrapper">
-            <DataTable data={tableData} />
-          </div>
-        </div>
-      </DashboardLayout>
-      <Footer />
+          </>
+        )}
+      </div>
+
+      <div className="data-table-wrapper">
+        <DataTable data={tableData} />
+      </div>
     </div>
+
+    {/* Recommended Plans and Estimated Bill Section */}
+    <div className="plans-and-bill-section">
+      <div className="recommended-plans-section">
+        <h2>Recommended Plans</h2>
+        <div className="recommended-plans-wrapper">
+          <RecommendedPlans />
+         
+        </div>
+      </div>
+
+      <div className="estimated-bill-section">
+        <h2>Projected Bill</h2>
+        <EstimatedBill />
+      </div>
+    </div>
+
+  </DashboardLayout>
+  <Footer />
+</div>
+
   );
 };
 

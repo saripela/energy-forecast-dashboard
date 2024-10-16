@@ -1,0 +1,35 @@
+.bill-summary-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+   margin-top: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bill-summary-card {
+    flex: 1;
+    margin: 10px 10px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background: linear-gradient(to bottom, #f9f9f9, #ffe4b5); /* Light blue gradient */
+  }
+  
+  .bill-summary-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .bill-summary-card h3 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+  }
+  

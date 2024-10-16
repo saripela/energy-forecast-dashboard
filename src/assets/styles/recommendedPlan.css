@@ -1,0 +1,266 @@
+/* CSS for the plan card */
+.recommended-plans-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  flex: 2;
+  justify-content: space-around;
+}
+
+.plan__wrapper {
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  max-width: 300px;
+  position: relative;
+  border: 2px solid #000;
+  border-radius: 5px;
+
+  
+
+  &.theme-color--amber {
+    .plan_callout1{
+      background-color: #ff8c00;
+    }
+    .plan_callout2 {
+      background-color: #ffdbb3;
+    }
+  }
+  &.theme-color--gray {
+    .plan_callout2 ,.plan_callout1{
+      background-color: #f0f0f0;
+    }
+  }
+
+}
+
+.plan__wrapper .chip {
+  background-color: #ff8c00;
+  /* Orange color for 'Most Popular' badge */
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  position: absolute;
+  top: -15px;
+  left: 31%;
+  box-shadow: 2px 2px 0 0 #000;
+  border: 2px solid #000;
+}
+
+.plan__wrapper h4,
+.plan__wrapper h2 {
+  color: #333;
+  /* Dark text for headings */
+  margin: 0;
+}
+
+.plan__wrapper h2 {
+  font-size: 1em;
+}
+
+.plan__wrapper h4 {
+  font-size: 1.1em;
+}
+
+.badge-block {
+  display: flex;
+  gap: 10px;
+  margin: 1rem 0;
+}
+
+.badges {
+  background-color: #fff;
+  /* Light grey badges */
+  border-radius: 15px;
+  padding: 4px 8px;
+  font-size: 0.8em;
+}
+
+
+
+.plan_callout1 {
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #000;
+
+}
+
+.plan_callout2 {
+ 
+  padding: 0 16px;
+}
+
+.plan__call .price-section {
+  display: flex;
+  align-items: baseline;
+}
+
+.price-section h2 {
+  color: #333;
+  font-size: 36px;
+  font-weight: 400;
+}
+
+.price-section sup h4 {
+  font-size: 1.2em;
+}
+
+.unit p {
+  font-size: 0.9em;
+  margin-left: 5px;
+}
+
+.priceUnit {
+  margin: 0;
+}
+
+.plan-tx {
+  margin-top: 15px;
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.plan-tx .tagline,
+.plan-tx .tagline .items {
+  display: flex;
+  align-items: center;
+}
+
+.tagline img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.tagline p {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.plan-features,
+.rate-details {
+  margin-top: 15px;
+}
+
+.plan-details__more-details {
+  border-top: 1px solid #ccc;
+  padding: 16px 0;
+}
+
+.plan-details__more-details .accordion-item--chevron {
+  transition: transform 0.3s;
+}
+
+.plan-details__more-details.collapsed .accordion-item--chevron {
+  transform: rotate(180deg);
+}
+
+.plan--bottom--buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.plan--bottom--buttons button {
+  background-color: #8a4cf5;
+  /* Purple button */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  width: 100%;
+}
+
+.plan--bottom--buttons button:hover {
+  background-color: #7233c9;
+  /* Darker purple on hover */
+}
+
+.plan-details__more-details__section {
+  display: none;
+}
+
+.plan-details__more-details__section.active {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .plan__wrapper {
+    max-width: 100%;
+  }
+}
+
+/* Price Section CSS */
+.price-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .rate {
+    display: flex;
+  }
+}
+
+
+
+/* Small superscript ¢ symbol */
+.price-section sup h4 {
+  font-size: 1.2rem;
+  margin-left: 2px;
+  color: #333;
+}
+
+/* Small text for units and additional info */
+.unit p {
+  font-size: 12px;
+  margin-left: 5px;
+  color: #333;
+}
+
+/* Prime Logo */
+.prime-logo {
+  width: 40px;
+  height: auto;
+  margin-left: 10px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.collapse {
+  display: none;
+  /* Ensure it's hidden when collapsed */
+}
+
+/* When the section is expanded */
+.collapse.show {
+  display: block;
+  /* Ensure it is displayed when expanded */
+  transition: max-height 0.4s ease-in-out;
+  /* Smooth transition for the height */
+  max-height: 1000px;
+  /* You can set a limit for the expanding section height */
+}
+
+/* Example custom animation for sliding effect */
+.collapse {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s ease-in-out;
+  /* Smoothly expand and collapse */
+}
+
+.collapse.show {
+  max-height: 1000px;
+  /* Arbitrary max height to make the content slide down smoothly */
+}
+

@@ -1,0 +1,158 @@
+/* Main card container */
+
+.energySaving-container h2{
+    text-align: center;
+}
+.background--primary-dark-pastel {
+    background-color: #f0f8ff;
+    /* A light pastel background color */
+}
+
+/* Ensure Swiper slides are flex containers */
+.swiper-slide {
+    display: flex;
+    align-items: stretch;
+    flex-shrink: 0;
+    height: auto;
+}
+
+/* Make the card a flex container */
+.detexas-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    height: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Ensure the image has a fixed height */
+.detexas-card__imgcontainer {
+    flex-shrink: 0;
+    width: 100%;
+    height: 180px;
+    /* Fixed height for image */
+    overflow: hidden;
+}
+
+.detexas-card__imgcontainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensure the image covers the container without distortion */
+}
+
+/* Make sure the content stretches to fill available space */
+.detexas-card__contents {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+
+    h4{
+        margin: 0;
+    }
+
+}
+
+/* Ensure that the link stays at the bottom of the card */
+.detexas-card__footer {
+    margin-top: auto;
+    /* Push the link to the bottom */
+
+}
+
+/* Button styling */
+.btn.btn--black {
+    border: none !important;
+    outline: none !important;
+    width: fit-content !important;
+    color: #000 !important;
+    font-weight: 700;
+}
+
+.btn.btn--black:hover {
+    background-color: #000;
+    /* Darker black on hover */
+
+}
+
+.swiper {
+    padding-bottom: 80px;
+}
+
+/* Position the arrows below the Swiper container */
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    bottom: 30px;
+    /* Adjust the distance from the bottom of the Swiper */
+    top: auto;
+    /* Reset the default top position */
+    width: auto;
+    /* Let the width adjust automatically */
+    height: auto;
+    color: #333;
+    /* Change color of the arrows */
+    font-size: 20px;
+    /* Adjust arrow size */
+    z-index: 10;
+    pointer-events: auto;
+
+    &:after {
+        font-size: 14px;
+        font-weight: 800;
+        width: 12px;
+        height: 12px;
+    }
+
+}
+
+/* Align the previous arrow */
+.swiper-button-prev {
+    left: 45%;
+    /* Center the previous arrow horizontally */
+    right: auto;
+}
+
+/* Align the next arrow */
+.swiper-button-next {
+    right: 45%;
+    /* Center the next arrow horizontally */
+    left: auto;
+}
+
+/* Add hover effects */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    color: #000;
+    /* Darker color on hover */
+}
+
+/* Position the entire Swiper container relative to allow absolute positioning of arrows */
+.swiper-container {
+    position: relative;
+    padding-bottom: 40px;
+    /* Add space at the bottom for the arrows */
+}
+/* Dismiss button (x) styling */
+.dismiss-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+    outline: none;
+  }
+  
+  .dismiss-btn:hover {
+    color: #000; /* Darken on hover */
+  }
+  

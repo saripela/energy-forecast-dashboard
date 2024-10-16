@@ -190,10 +190,11 @@ body {
   grid-area: content;
   display: flex;
   flex-direction: column;
-  align-items: center;
+ 
   justify-content: center;
   padding: 20px;
   background-color: #fff;
+  gap: 60px;
 }
 
 /* Toggle Chart Section */
@@ -233,15 +234,19 @@ body {
 }
 
 /* Charts and Table Layout */
-.charts-and-table {
+.charts-and-table-wrapper,
+.plans-and-bill-section {
   display: flex;
   justify-content: space-between;
   gap: 80px;
   width: 100%;
+  text-align: center;
 }
 
+
 @media (max-width: 1023px) {
-  .charts-and-table {
+  .charts-and-table-wrapper,
+  .plans-and-bill-section {
     flex-direction: column;
     gap: 0;
   }
@@ -307,4 +312,30 @@ body {
   text-align: center;
   font-size: 14px;
   border-top: 1px solid #ddd;
+}
+.recommended-plans-section {
+  flex: 2;
+  text-align: center;
+}
+
+
+.estimated-bill-section {
+  flex: 1; /* Make the projected bill section smaller */
+  
+}
+.swiper-container {
+  width: 100%;
+  max-width: 100vw; /* Ensure the container does not exceed the viewport width */
+  margin: 0 auto;
+  overflow: hidden;  /* Prevent overflow issues */
+}
+.swiper-slide {
+  width: 31.3% !important;  /* Override Swiper's inline width with auto */
+  flex-shrink: 0;          /* Prevent shrinking */
+  flex-grow: 0;    
+  box-sizing: border-box; /* Include padding and border in the width */        /* Prevent growing */
+
+  @media (max-width: 767px) {
+    width: 48.3% !important;
+  }
 }
