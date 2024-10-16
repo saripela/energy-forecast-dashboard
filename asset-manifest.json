@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/energy-forecast-dashboard/static/css/main.5c3b21a5.css",
+    "main.js": "/energy-forecast-dashboard/static/js/main.b54f647d.js",
+    "static/js/453.c0afb839.chunk.js": "/energy-forecast-dashboard/static/js/453.c0afb839.chunk.js",
+    "index.html": "/energy-forecast-dashboard/index.html",
+    "main.5c3b21a5.css.map": "/energy-forecast-dashboard/static/css/main.5c3b21a5.css.map",
+    "main.b54f647d.js.map": "/energy-forecast-dashboard/static/js/main.b54f647d.js.map",
+    "453.c0afb839.chunk.js.map": "/energy-forecast-dashboard/static/js/453.c0afb839.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5c3b21a5.css",
+    "static/js/main.b54f647d.js"
+  ]
+}
